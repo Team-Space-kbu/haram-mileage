@@ -1,4 +1,4 @@
-package space.api;
+package space.lambda.api;
 
 import okhttp3.FormBody.Builder;
 import okhttp3.OkHttpClient;

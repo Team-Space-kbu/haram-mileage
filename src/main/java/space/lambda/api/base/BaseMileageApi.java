@@ -1,7 +1,7 @@
-package space.api.base;
+package space.lambda.api.base;
 
 
-import space.api.MileageApi;
+import space.lambda.api.MileageApi;
 
 public abstract class BaseMileageApi implements MileageApi {
   protected String apiUrl = "https://asp.netusys.com/";

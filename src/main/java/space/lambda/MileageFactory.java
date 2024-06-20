@@ -1,10 +1,10 @@
-package space;
+package space.lambda;
 
 import org.jetbrains.annotations.NotNull;
-import space.api.MileageAllUserApi;
-import space.api.MileageApi;
-import space.api.MileageFindUserApi;
-import space.data.MileageType;
+import space.lambda.api.MileageAllUserApi;
+import space.lambda.api.MileageApi;
+import space.lambda.api.MileageFindUserApi;
+import space.lambda.data.MileageType;
 
 public class MileageFactory {
 

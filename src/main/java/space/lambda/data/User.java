@@ -1,4 +1,4 @@
-package space.data;
+package space.lambda.data;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +17,4 @@ public class User {
   String paymentsNum;     //결제횟수
   String amountPayment;  //결제금액
   String joinDate;      //가입일
-
-
-
 }

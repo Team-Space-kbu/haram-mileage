@@ -1,4 +1,4 @@
-package space.api;
+package space.lambda.api;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import okhttp3.FormBody;
 import okhttp3.FormBody.Builder;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import space.api.base.BaseMileageApi;
+import space.lambda.api.base.BaseMileageApi;
 
 public class MileageAllUserApi extends BaseMileageApi implements MileageApi {
 

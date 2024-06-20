@@ -1,4 +1,4 @@
-package space.data;
+package space.lambda.data;
 
 public record Mileage(String type, String data) {
 

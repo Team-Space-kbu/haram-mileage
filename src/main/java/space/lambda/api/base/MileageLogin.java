@@ -1,10 +1,10 @@
-package space.api.base;
+package space.lambda.api.base;
 
 import okhttp3.FormBody;
 import okhttp3.FormBody.Builder;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import space.api.MileageApi;
+import space.lambda.api.MileageApi;
 
 public class MileageLogin extends BaseMileageApi implements MileageApi {
 

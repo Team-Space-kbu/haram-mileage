@@ -1,4 +1,4 @@
-package space.data;
+package space.lambda.data;
 
 import lombok.Builder;
 
