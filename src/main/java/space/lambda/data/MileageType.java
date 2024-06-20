@@ -5,5 +5,4 @@ public enum MileageType {
   FIND_ALL,
   FIND_USER,
   LOGIN
-
 }

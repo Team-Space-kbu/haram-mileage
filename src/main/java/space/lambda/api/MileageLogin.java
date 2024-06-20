@@ -1,10 +1,11 @@
-package space.lambda.api.base;
+package space.lambda.api;
 
 import okhttp3.FormBody;
 import okhttp3.FormBody.Builder;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import space.lambda.api.MileageApi;
+import space.lambda.api.base.BaseMileageApi;
+import space.lambda.data.Mileage;
 
 public class MileageLogin extends BaseMileageApi implements MileageApi {
 
@@ -29,5 +30,14 @@ public class MileageLogin extends BaseMileageApi implements MileageApi {
         .add("appfg", "web")
         .add("logoutFg", "Y")
         .add("login_auto_serial", "Y");
+  }
+
+  @Override
+  public RequestBody setBody(Mileage event) {
+    return getRequestBody()
+        /////////////////////
+        //로그인 관련 데이터 추가//
+        /////////////////////
+        .build();
   }
 }

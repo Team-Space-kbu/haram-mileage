@@ -7,6 +7,7 @@ import okhttp3.FormBody.Builder;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import space.lambda.api.base.BaseMileageApi;
+import space.lambda.data.Mileage;
 
 public class MileageAllUserApi extends BaseMileageApi implements MileageApi {
 
@@ -87,6 +88,11 @@ public class MileageAllUserApi extends BaseMileageApi implements MileageApi {
         .add("TERM_FG", "A")
         .add("USE_YN", "")
         .add("WEDDING_YN", "A");
+  }
+
+  @Override
+  public RequestBody setBody(Mileage event) {
+    return getRequestBody().build();
   }
 
 }
