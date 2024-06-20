@@ -1,14 +1,11 @@
-# Basic function with minimal dependencies (Java)
+# Mileage service, AWS Lambda function development manual (Java)
 
-![Architecture](/sample-apps/java-basic/images/sample-java-basic.png)
+![Architecture](/images/sample-java-basic.png)
 
 The project source includes function code and supporting resources:
 - `src/main` - A Java function.
-- `src/test` - A unit test and helper classes.
-- `template.yml` - An AWS CloudFormation template that creates an application.
 - `build.gradle` - A Gradle build file.
-- `pom.xml` - A Maven build file.
-- `1-create-bucket.sh`, `2-deploy.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
+- `shellScript/1-create-bucket.sh`, `shellScript/2-deploy.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 Use the following instructions to deploy the sample application.
 
@@ -26,13 +23,13 @@ Download or clone this repository.
 
 To create a new bucket for deployment artifacts, run `1-create-bucket.sh`.
 
-    java17-examples$ ./1-create-bucket.sh
+    java17-examples$ ./shellScript/1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e4xmplb5b22e0d
 
 # Deploy
 To deploy the application, run `2-deploy.sh`.
 
-    java17-examples$ ./2-deploy.sh
+    java17-examples$ ./shellScript/2-deploy.sh
     BUILD SUCCESSFUL in 1s
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -42,7 +39,7 @@ This script uses AWS CloudFormation to deploy the Lambda functions and an IAM ro
 
 You can also build the application with Maven. To use maven, add `mvn` to the command.
 
-    java17-examples$ ./2-deploy.sh mvn
+    java17-examples$ ./shellScript/2-deploy.sh mvn
     [INFO] Scanning for projects...
     [INFO] -----------------------< com.example:java17-examples >-----------------------
     [INFO] Building java17-examples-function 1.0-SNAPSHOT
@@ -52,7 +49,7 @@ You can also build the application with Maven. To use maven, add `mvn` to the co
 # Test
 To invoke the function, run `3-invoke.sh`.
 
-    java17-examples$ ./3-invoke.sh
+    java17-examples$ ./shellScript/3-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -64,4 +61,4 @@ Let the script invoke the function a few times and then press `CRTL+C` to exit.
 # Cleanup
 To delete the application, run `4-cleanup.sh`.
 
-    java17-examples$ ./4-cleanup.sh
+    java17-examples$ ./shellScript/4-cleanup.sh
