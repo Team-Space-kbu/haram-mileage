@@ -7,7 +7,7 @@ The project source includes function code and supporting resources:
 - `build.gradle` - A Gradle build file.
 - `shellScript/1-create-bucket.sh`, `shellScript/2-deploy.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
-Use the following instructions to deploy the sample application.
+Use the following instructions to deploy the mileage application.
 
 # Requirements
 - [Java 17 runtime environment (SE JRE)](https://www.oracle.com/java/technologies/javase-downloads.html)
