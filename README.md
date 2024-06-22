@@ -57,6 +57,18 @@ To invoke the function, run `3-invoke.sh`.
 
 Let the script invoke the function a few times and then press `CRTL+C` to exit.
 
+# Request
+To make a request using Postman
+
+
+    {
+        "type": "search",   //student or search
+        "data": "00002481"  //cardNumber
+    }
+
+AWS API gateway is created based on settings. If the request is not made in an abbreviated form, an error will occur.
+    
+
 # Cleanup
 To delete the application, run `4-cleanup.sh`.
 
