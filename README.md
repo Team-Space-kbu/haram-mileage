@@ -63,7 +63,7 @@ To make a request using Postman
 
     {
         "type": "search",   //student or search
-        "data": "00002481"  //cardNumber
+        "data": "00000000"  //cardNumber
     }
 
 AWS API gateway is created based on settings. If the request is not made in an abbreviated form, an error will occur.
