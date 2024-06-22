@@ -10,8 +10,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import space.lambda.api.MileageApi;
-import space.lambda.data.Mileage;
-import space.lambda.data.MileageType;
+import space.lambda.data.Detail;
+import space.lambda.model.MileageModel;
+import space.lambda.model.Type;
 import space.lambda.data.User;
 import space.lambda.util.LoggerUtil;
 
@@ -22,7 +23,7 @@ public class MileageService {
 
   public Response mileageRequest(
       MileageApi mileageApi,
-      Mileage event,
+      MileageModel event,
       String cookie
   ) throws IOException {
     logger.writeLogger("An API request was made to the mileage server." + event.toType());
@@ -31,9 +32,9 @@ public class MileageService {
     return client.newCall(request).execute();
   }
 
-  public String mileageLogin(MileageFactory factory, Mileage event) {
+  public String mileageLogin(MileageFactory factory, MileageModel event) {
     logger.writeLogger("No login information, try logging in");
-    MileageApi mileageApi = factory.getMileage(MileageType.LOGIN);
+    MileageApi mileageApi = factory.getMileage(Type.LOGIN);
     try (Response response = mileageRequest(mileageApi, event, "")) {
       if (!response.isSuccessful()) {
         throw new IOException("Unexpected code " + response);
@@ -47,12 +48,29 @@ public class MileageService {
     }
   }
 
-  public ArrayList<User> mileageFindUser(NodeList nList) {
-    return null;
+  public ArrayList<Detail> mileageFindUser(NodeList nList) {
+    ArrayList<Detail> details = new ArrayList<>(nList.getLength());
+    for (int i = 0; i < nList.getLength(); i++) {
+      Node nNode = nList.item(i);
+      if (nNode.getNodeType() != Node.ELEMENT_NODE) {
+        continue;
+      }
+      Element eElement = (Element) nNode;
+      NodeList nList2 = eElement.getElementsByTagName("TD");
+      Detail user = Detail.builder()
+          .changeDate(getTextContent(nList2, 0))
+          .saleDate(getTextContent(nList2, 1))
+          .status(getTextContent(nList2, 2))
+          .point(getTextContent(nList2, 3))
+          .note(getTextContent(nList2, 4))
+          .build();
+      details.add(user);
+    }  // if end
+    return details;
   }
 
   public ArrayList<User> mileageAllUser(NodeList nList) {
-    ArrayList<User> userArrayList = new ArrayList<>(nList.getLength());
+    ArrayList<User> users = new ArrayList<>(nList.getLength());
     for (int i = 0; i < nList.getLength(); i++) {
       Node nNode = nList.item(i);
       if (nNode.getNodeType() != Node.ELEMENT_NODE) {
@@ -73,9 +91,9 @@ public class MileageService {
           .amountPayment(getTextContent(nList2, 9))
           .joinDate(getTextContent(nList2, 10))
           .build();
-      userArrayList.add(user);
+      users.add(user);
     }  // if end
-    return userArrayList;
+    return users;
   }
 
   private static String getTextContent(NodeList nodeList, int index) {

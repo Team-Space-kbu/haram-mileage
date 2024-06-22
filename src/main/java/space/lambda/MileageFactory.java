@@ -4,12 +4,12 @@ import org.jetbrains.annotations.NotNull;
 import space.lambda.api.MileageAllUserApi;
 import space.lambda.api.MileageApi;
 import space.lambda.api.MileageFindUserApi;
-import space.lambda.api.MileageLogin;
-import space.lambda.data.MileageType;
+import space.lambda.api.MileageLoginApi;
+import space.lambda.model.Type;
 
 public class MileageFactory {
 
-  public MileageApi getMileage(@NotNull MileageType type) {
+  public MileageApi getMileage(@NotNull Type type) {
     switch (type) {
       case FIND_ALL -> {
         return new MileageAllUserApi();
@@ -18,7 +18,7 @@ public class MileageFactory {
         return new MileageFindUserApi();
       }
       case LOGIN -> {
-        return new MileageLogin();
+        return new MileageLoginApi();
       }
       default -> {
         throw new RuntimeException();

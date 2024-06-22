@@ -14,8 +14,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import space.lambda.data.Mileage;
-import space.lambda.data.MileageType;
+import space.lambda.model.MileageModel;
+import space.lambda.model.Type;
 import space.lambda.util.LoggerUtil;
 
 // Handler value: space.lambda.HandlerMileage
@@ -34,11 +34,11 @@ public class HandlerMileage implements RequestHandler<APIGatewayProxyRequestEven
       logger.setLogger(context.getLogger());
     }
     try {
-      Mileage event = objectMapper.readValue(input.getBody(), Mileage.class);
+      MileageModel event = objectMapper.readValue(input.getBody(), MileageModel.class);
 
-      if (event.toType() == MileageType.EMPTY) {
+      if (event.toType() == Type.EMPTY) {
         logger.writeLogger(
-            "The requested value type is invalid. : " + event.toType() + "\ntype : " + event.type());
+            "The requested value type is invalid. : " + event.toType() + "\ntype : " + event.toType());
         throw new RuntimeException("The requested value type is invalid.");
       }
 
