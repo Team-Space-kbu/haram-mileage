@@ -4,7 +4,7 @@ import okhttp3.FormBody.Builder;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import space.lambda.api.base.BaseMileageApi;
-import space.lambda.data.Mileage;
+import space.lambda.model.MileageModel;
 
 public class MileageFindUserApi extends BaseMileageApi implements MileageApi {
 
@@ -36,7 +36,7 @@ public class MileageFindUserApi extends BaseMileageApi implements MileageApi {
   }
 
   @Override
-  public RequestBody setBody(Mileage event) {
+  public RequestBody setBody(MileageModel event) {
     return getRequestBody()
         .add("CST_NO", event.data())       //조회할 사용자 정보
         .build();
