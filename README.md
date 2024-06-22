@@ -66,7 +66,7 @@ To make a request using Postman
         "data": "00000000"  //cardNumber
     }
 
-AWS API gateway is created based on settings. If the request is not made in an abbreviated form, an error will occur.
+AWS API gateway must be used. If the request is not made in an abbreviated form, an error will occur.
     
 
 # Cleanup
