@@ -1,7 +1,10 @@
 package space.lambda.data;
 
+import static space.lambda.util.TextUtil.getTextContent;
+
 import lombok.Builder;
 import lombok.Getter;
+import org.w3c.dom.NodeList;
 
 @Builder
 @Getter
@@ -17,4 +20,20 @@ public class User {
   String paymentsNum;     //결제횟수
   String amountPayment;  //결제금액
   String joinDate;      //가입일
+
+  public static User toUser(NodeList nList2){
+    return User.builder()
+        .uniqueNumber(getTextContent(nList2, 0))
+        .userType(getTextContent(nList2, 1))
+        .studentStatus(getTextContent(nList2, 2))
+        .cardNumber(getTextContent(nList2, 3))
+        .earnPoints(getTextContent(nList2, 4))
+        .usePoints(getTextContent(nList2, 5))
+        .adjustmentPoint(getTextContent(nList2, 6))
+        .availablePoints(getTextContent(nList2, 7))
+        .paymentsNum(getTextContent(nList2, 8))
+        .amountPayment(getTextContent(nList2, 9))
+        .joinDate(getTextContent(nList2, 10))
+        .build();
+  }
 }

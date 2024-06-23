@@ -19,16 +19,19 @@ import space.lambda.model.Type;
 import space.lambda.util.LoggerUtil;
 
 // Handler value: space.lambda.HandlerMileage
-public class HandlerMileage implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class HandlerMileage implements
+    RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+
   private static final ObjectMapper objectMapper = new ObjectMapper();
   private static final MileageFactory factory = new MileageFactory();
   private static final DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
   private static final MileageService service = new MileageService();
-  private final LoggerUtil logger = new LoggerUtil();
+  private static final LoggerUtil logger = new LoggerUtil();
   private static String cookie;
 
   @Override
-  public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input, Context context) {
+  public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent input,
+      Context context) {
     if (logger.statusLogger()) {
       //로그기록 변수 설정
       logger.setLogger(context.getLogger());
@@ -37,8 +40,7 @@ public class HandlerMileage implements RequestHandler<APIGatewayProxyRequestEven
       MileageModel event = objectMapper.readValue(input.getBody(), MileageModel.class);
 
       if (event.toType() == Type.EMPTY) {
-        logger.writeLogger(
-            "The requested value type is invalid. : " + event.toType() + "\ntype : " + event.toType());
+        logger.writeLogger("The requested value type is invalid. : " + event.type());
         throw new RuntimeException("The requested value type is invalid.");
       }
 
@@ -99,13 +101,15 @@ public class HandlerMileage implements RequestHandler<APIGatewayProxyRequestEven
   private NodeList toNodeList(
       Response response
   ) throws ParserConfigurationException, IOException, SAXException {
-    String string = response.body()
-        .string()
-        .trim()
-        .replaceAll(
-            "[^\\u0009\\u000A\\u000D\\u0020-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFF]+",
-            ""
-        );
+    String string = response.body() != null ?
+        response.body()
+            .string()
+            .trim()
+            .replaceAll(
+                "[^\\u0009\\u000A\\u000D\\u0020-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFF]+",
+                ""
+            )
+        : "";
     InputSource inputSource = new InputSource(new StringReader(string));
     logger.writeLogger("response xml to InputSource");
 

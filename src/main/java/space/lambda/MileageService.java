@@ -1,5 +1,7 @@
 package space.lambda;
 
+import static space.lambda.util.TextUtil.getTextContent;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import okhttp3.OkHttpClient;
@@ -19,7 +21,7 @@ import space.lambda.util.LoggerUtil;
 public class MileageService {
 
   public static final OkHttpClient client = new OkHttpClient().newBuilder().build();
-  private final LoggerUtil logger = new LoggerUtil();
+  private static final LoggerUtil logger = new LoggerUtil();
 
   public Response mileageRequest(
       MileageApi mileageApi,
@@ -56,15 +58,7 @@ public class MileageService {
         continue;
       }
       Element eElement = (Element) nNode;
-      NodeList nList2 = eElement.getElementsByTagName("TD");
-      Detail user = Detail.builder()
-          .changeDate(getTextContent(nList2, 0))
-          .saleDate(getTextContent(nList2, 1))
-          .status(getTextContent(nList2, 2))
-          .point(getTextContent(nList2, 3))
-          .note(getTextContent(nList2, 4))
-          .build();
-      details.add(user);
+      details.add(Detail.toDetail(eElement.getElementsByTagName("TD")));
     }  // if end
     return details;
   }
@@ -77,30 +71,11 @@ public class MileageService {
         continue;
       }
       Element eElement = (Element) nNode;
-      NodeList nList2 = eElement.getElementsByTagName("TD");
-      User user = User.builder()
-          .uniqueNumber(getTextContent(nList2, 0))
-          .userType(getTextContent(nList2, 1))
-          .studentStatus(getTextContent(nList2, 2))
-          .cardNumber(getTextContent(nList2, 3))
-          .earnPoints(getTextContent(nList2, 4))
-          .usePoints(getTextContent(nList2, 5))
-          .adjustmentPoint(getTextContent(nList2, 6))
-          .availablePoints(getTextContent(nList2, 7))
-          .paymentsNum(getTextContent(nList2, 8))
-          .amountPayment(getTextContent(nList2, 9))
-          .joinDate(getTextContent(nList2, 10))
-          .build();
-      users.add(user);
+      users.add(User.toUser(eElement.getElementsByTagName("TD")));
     }  // if end
     return users;
   }
 
-  private static String getTextContent(NodeList nodeList, int index) {
-    if (nodeList.item(index) != null) {
-      return nodeList.item(index).getTextContent().trim();
-    }
-    return "";
-  }
+
 
 }
