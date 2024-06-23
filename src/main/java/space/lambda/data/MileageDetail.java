@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 @Builder
 @Getter
-public class Detail {
+public class MileageDetail {
   private String changeDate;   //변경일자
   private String saleDate;     //판매일자
   private String status;       //구분
@@ -16,8 +16,8 @@ public class Detail {
   private String note;         //비고
 
 
-  public static Detail toDetail(NodeList nList2){
-    return Detail.builder()
+  public static MileageDetail toDetail(NodeList nList2){
+    return MileageDetail.builder()
         .changeDate(getTextContent(nList2, 0))
         .saleDate(getTextContent(nList2, 1))
         .status(getTextContent(nList2, 2))

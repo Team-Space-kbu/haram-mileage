@@ -1,9 +1,8 @@
 package space.lambda;
 
-import static space.lambda.util.TextUtil.getTextContent;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -12,10 +11,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import space.lambda.api.MileageApi;
-import space.lambda.data.Detail;
+import space.lambda.data.MileageDetail;
 import space.lambda.model.MileageModel;
 import space.lambda.model.Type;
-import space.lambda.data.User;
+import space.lambda.data.MileageInfo;
 import space.lambda.util.LoggerUtil;
 
 public class MileageService {
@@ -50,30 +49,30 @@ public class MileageService {
     }
   }
 
-  public ArrayList<Detail> mileageFindUser(NodeList nList) {
-    ArrayList<Detail> details = new ArrayList<>(nList.getLength());
+  public List<MileageDetail> mileageFindUser(NodeList nList) {
+    ArrayList<MileageDetail> mileageDetails = new ArrayList<>(nList.getLength());
     for (int i = 0; i < nList.getLength(); i++) {
       Node nNode = nList.item(i);
       if (nNode.getNodeType() != Node.ELEMENT_NODE) {
         continue;
       }
       Element eElement = (Element) nNode;
-      details.add(Detail.toDetail(eElement.getElementsByTagName("TD")));
+      mileageDetails.add(MileageDetail.toDetail(eElement.getElementsByTagName("TD")));
     }  // if end
-    return details;
+    return mileageDetails;
   }
 
-  public ArrayList<User> mileageAllUser(NodeList nList) {
-    ArrayList<User> users = new ArrayList<>(nList.getLength());
+  public List<MileageInfo> mileageAllUser(NodeList nList) {
+    ArrayList<MileageInfo> mileageInfos = new ArrayList<>(nList.getLength());
     for (int i = 0; i < nList.getLength(); i++) {
       Node nNode = nList.item(i);
       if (nNode.getNodeType() != Node.ELEMENT_NODE) {
         continue;
       }
       Element eElement = (Element) nNode;
-      users.add(User.toUser(eElement.getElementsByTagName("TD")));
+      mileageInfos.add(MileageInfo.toUser(eElement.getElementsByTagName("TD")));
     }  // if end
-    return users;
+    return mileageInfos;
   }
 
 
