@@ -11,7 +11,7 @@ public enum MileageType {
   STUDENT,
   ETC;
 
-  private static final String regex =  "(\\d{2,4}(-\\d)?)[\\s]?([^\\-]+)[\\s]?-[\\s]?([^\\-]+)";
+  private static final String regex =  "(\\d{2,4}(-\\d)?)?[\\s]?([^\\-]+)[\\s]?-?[\\s]?([^\\-]+)";
   private static final Pattern pattern = Pattern.compile(regex);
 
   public static MileageType findMileageType(String etc, String status) {
