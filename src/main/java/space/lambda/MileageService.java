@@ -1,8 +1,9 @@
 package space.lambda;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -50,29 +51,21 @@ public class MileageService {
   }
 
   public List<MileageDetail> mileageFindUser(NodeList nList) {
-    ArrayList<MileageDetail> mileageDetails = new ArrayList<>(nList.getLength());
-    for (int i = 0; i < nList.getLength(); i++) {
-      Node nNode = nList.item(i);
-      if (nNode.getNodeType() != Node.ELEMENT_NODE) {
-        continue;
-      }
-      Element eElement = (Element) nNode;
-      mileageDetails.add(MileageDetail.toDetail(eElement.getElementsByTagName("TD")));
-    }  // if end
-    return mileageDetails;
+    return IntStream.range(0, nList.getLength())
+        .mapToObj(nList::item)
+        .filter(node -> node.getNodeType() == Node.ELEMENT_NODE)
+        .map(node -> (Element) node)
+        .map(eElement -> MileageDetail.toDetail(eElement.getElementsByTagName("TD")))
+        .collect(Collectors.toList());
   }
 
   public List<MileageInfo> mileageAllUser(NodeList nList) {
-    ArrayList<MileageInfo> mileageInfos = new ArrayList<>(nList.getLength());
-    for (int i = 0; i < nList.getLength(); i++) {
-      Node nNode = nList.item(i);
-      if (nNode.getNodeType() != Node.ELEMENT_NODE) {
-        continue;
-      }
-      Element eElement = (Element) nNode;
-      mileageInfos.add(MileageInfo.toUser(eElement.getElementsByTagName("TD")));
-    }  // if end
-    return mileageInfos;
+    return IntStream.range(0, nList.getLength())
+        .mapToObj(nList::item)
+        .filter(nNode -> nNode.getNodeType() == Node.ELEMENT_NODE)
+        .map(nNode -> (Element) nNode)
+        .map(eElement -> MileageInfo.toUser(eElement.getElementsByTagName("TD")))
+        .collect(Collectors.toList());
   }
 
 
