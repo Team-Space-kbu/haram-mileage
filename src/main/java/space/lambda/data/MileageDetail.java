@@ -1,6 +1,7 @@
 package space.lambda.data;
 
 import static space.lambda.util.TextUtil.getTextContent;
+import static space.lambda.util.TextUtil.toDate;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -22,8 +23,8 @@ public class MileageDetail {
     String note = getTextContent(nList2, 4);
     String shop = note.replaceAll("성서대\\.|:|\\(승인\\)|포인트|사용|취소", "").trim();
     return MileageDetail.builder()
-        .changeDate(getTextContent(nList2, 0))
-        .saleDate(getTextContent(nList2, 1))
+        .changeDate(toDate(getTextContent(nList2, 0)))
+        .saleDate(toDate(getTextContent(nList2, 1)))
         .status(getTextContent(nList2, 2))
         .point(getTextContent(nList2, 3))
         .etc(shop)
