@@ -12,7 +12,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import space.lambda.api.MileageApi;
-import space.lambda.data.MileageDetail;
+import space.lambda.data.MileageUseDetail;
 import space.lambda.model.MileageModel;
 import space.lambda.model.Type;
 import space.lambda.data.MileageInfo;
@@ -50,12 +50,12 @@ public class MileageService {
     }
   }
 
-  public List<MileageDetail> mileageFindUser(NodeList nList) {
+  public List<MileageUseDetail> mileageFindUser(NodeList nList) {
     return IntStream.range(0, nList.getLength())
         .mapToObj(nList::item)
         .filter(node -> node.getNodeType() == Node.ELEMENT_NODE)
         .map(node -> (Element) node)
-        .map(eElement -> MileageDetail.toDetail(eElement.getElementsByTagName("TD")))
+        .map(eElement -> MileageUseDetail.toDetail(eElement.getElementsByTagName("TD")))
         .collect(Collectors.toList());
   }
 

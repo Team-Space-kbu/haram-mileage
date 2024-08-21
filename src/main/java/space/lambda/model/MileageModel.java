@@ -8,7 +8,13 @@ public record MileageModel(String type, String data) {
         return Type.FIND_ALL;
       }
       case "student" -> {
-        return Type.FIND_USER;
+        return Type.USER_DETAIL;
+      }
+      case "detail" -> {
+        return Type.DETAIL_USE;
+      }
+      case "DETAIL_USER" -> {
+        return Type.DETAIL_USER;
       }
       default -> {
         return Type.EMPTY;

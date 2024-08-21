@@ -8,11 +8,12 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import space.lambda.api.base.BaseMileageApi;
 import space.lambda.model.MileageModel;
+import space.lambda.model.Type;
 
 public class MileageAllUserApi extends BaseMileageApi implements MileageApi {
 
   @Override
-  public Request getRequest(RequestBody requestBody,String cookie) {
+  public Request getRequest(RequestBody requestBody, String cookie) {
     return new Request.Builder()
         .url(apiUrl + "ddd.sheetAction")
         .post(requestBody)
@@ -51,7 +52,6 @@ public class MileageAllUserApi extends BaseMileageApi implements MileageApi {
         .add("CST_CLS_CD", "0") //0재학생, 1교직원
         .add("CST_ID", "")
         .add("CST_NM", "")
-        .add("CST_NO", "")  // ✓ 회원번호 검색
         .add("DATE_FG", "A")
         .add("DM_RECV_YN", "")
         .add("EMAIL_ADDR", "")
@@ -92,7 +92,16 @@ public class MileageAllUserApi extends BaseMileageApi implements MileageApi {
 
   @Override
   public RequestBody setBody(MileageModel event) {
-    return getRequestBody().build();
+    if (event.type().equals("DETAIL_USER")) {
+      return getRequestBody()
+          .add("CST_NO", event.data())  // ✓ 회원번호 검색
+          .build();
+    }else{
+      return getRequestBody()
+          .add("CST_NO", "")  // ✓ 회원번호 검색
+          .build();
+    }
+
   }
 
 }

@@ -11,17 +11,17 @@ public class MileageFactory {
 
   public MileageApi getMileage(@NotNull Type type) {
     switch (type) {
-      case FIND_ALL -> {
+      case FIND_ALL, DETAIL_USER -> {
         return new MileageAllUserApi();
       }
-      case FIND_USER -> {
+      case USER_DETAIL, DETAIL_USE -> {
         return new MileageFindUserApi();
       }
       case LOGIN -> {
         return new MileageLoginApi();
       }
       default -> {
-        throw new RuntimeException();
+        throw new RuntimeException("Not found mileage type");
       }
     }
   }
